@@ -4,7 +4,7 @@ using namespace std;
 #include"dsa.h"
 #define s 9
 int func(bool arr[s][s], int i, int j, DSA<int >* ptr, DSA<bool >* barr);
-bool fun(DSA<int >*, DSA<bool >*, int, int,int ,int);
+bool fun(DSA<int >*, DSA<bool >*, int, int);
 int main() {
 	ifstream file;
 	file.open("tre.txt", ios::in);
@@ -34,7 +34,7 @@ int main() {
 		cout << endl;
 	}
 	cout << endl << endl;*/
-	fun(ptr,barr, 0, 0,-1,-1);
+	fun(ptr,barr, 0, 0);
 }
 int func(bool arr[s][s], int i, int j, DSA<int >* ptr, DSA<bool >* barr) {
 	if (i == s)
@@ -48,7 +48,7 @@ int func(bool arr[s][s], int i, int j, DSA<int >* ptr, DSA<bool >* barr) {
 		return func(arr, i + 1, 0, ptr,barr);
 	return func(arr, i, j + 1, ptr,barr);
 }
-bool fun(DSA<int >* ptr, DSA<bool >* barr, int i, int j,int pi,int pj){
+bool fun(DSA<int >* ptr, DSA<bool >* barr, int i, int j){
 	cout << "At " << i << " " << ptr[i][j] << endl;
 	if (i == s - 1 && ptr[i][j] == s - 1) {
 		cout << "Reached Destination" << endl;
@@ -59,12 +59,12 @@ bool fun(DSA<int >* ptr, DSA<bool >* barr, int i, int j,int pi,int pj){
 	if (j + 1 < ptr[i].get_size())
 		if (ptr[i][j] + 1 == ptr[i][j + 1])
 			if (barr[i][j + 1] == false)
-			p= fun(ptr,barr, i, j + 1,i,j);
+			p= fun(ptr,barr, i, j + 1);
 	if (j - 1 > -1)
 	if (!p)
 			if (ptr[i][j] - 1 == ptr[i][j - 1])
 				if (barr[i][j - 1] == false) 
-				p = fun(ptr, barr,i, j - 1,i,j);
+				p = fun(ptr, barr,i, j - 1);
 	if(!p)
 		if (i != s - 1){
 		int x;
@@ -79,7 +79,7 @@ bool fun(DSA<int >* ptr, DSA<bool >* barr, int i, int j,int pi,int pj){
 		}
 		if (t)
 			if (barr[i + 1][x] == false)
-			p= fun(ptr, barr,i + 1, x,i,j);
+			p= fun(ptr, barr,i + 1, x);
 	}
 	if(!p)
 	if (i != 0){
@@ -95,7 +95,7 @@ bool fun(DSA<int >* ptr, DSA<bool >* barr, int i, int j,int pi,int pj){
 		}
 		if (t) {
 			if (barr[i - 1][x] == false)
-			p = fun(ptr, barr, i - 1, x, i, j);
+			p = fun(ptr, barr, i - 1, x);
 		}
 	}
 	if (!p) { cout << "Retreat:At " << i << " " << ptr[i][j] << endl; return p; }
